@@ -1,0 +1,47 @@
+#19 mars 2020: kopierade denna från en gammal fil men denna räknar ihop dina poäng och kollar ifall du har vunnit
+#yourcards är dina kort
+#computercards är datorns kort
+def sjugo_ett_you(yourcards, computercards):
+    poangy = 0 # mina poäng
+    poangc = 0 #datorns poäng
+    lengt = len(yourcards) #antal kort jag har
+     # antal kort datorn har
+    for i in range(0, lengt):
+        if len(yourcards[i]) == 4:
+            a = int(yourcards[i][0:2])
+            poangy += a
+        elif len(yourcards[i]) == 3:
+            if yourcards[i][0] == 'K':
+                poangy += 10
+            elif yourcards[i][0] == 'Q':
+                poangy += 10
+            elif yourcards[i][0] == 'J':
+                poangy += 10
+            else:
+                b = int(yourcards[i][0])
+                poangy += b
+    for r in range(0, lengt):
+        if len(computercards[r]) == 4:
+            a = int(computercards[r][0:2])
+            poangc += a
+        elif len(computercards[r]) == 3:
+            if computercards[r][0] == 'K':
+                poangc += 10
+            elif computercards[r][0] == 'Q':
+                poangc += 10
+            elif computercards[r][0] == 'J':
+                poangc += 10
+            else:
+                b = int(computercards[r][0])
+                poangc += b
+    if poangy == 21 and poangc < 21 or poangc > 21:
+        print('you won')
+    elif poangc == 21:
+        print('you lost')
+    elif poangc > 21 and poangy < 21:
+        print('you won')
+    elif poangc > 21 and poangy > 21:
+        print('you lost')
+    elif poangy == poangc:
+        print('draw')
+        
