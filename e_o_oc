@@ -1,0 +1,54 @@
+
+import os
+#lista är däcken
+#playerlista är spelarens kort hög
+#firstplay är ifall det är i början då du får två kort istället för ett då behöver man kolla båda korten
+def ess(lista, playerlista, poangp, poangc):
+    a = 1
+    lengt = len(playerlista)
+    while a == 1:
+        q = 0
+        for r in range(q, lengt+1):
+            if len(playerlista[r]) == 4:
+                poangc += 10
+            elif len(playerlista[r]) == 3:
+                if playerlista[r][0] == 'K':
+                    poangc += 10
+                elif playerlista[r][0] == 'Q':
+                    poangc += 10
+                elif playerlista[r][0] == 'J':
+                    poangc += 10
+                elif playerlista[r][0] == 'A':
+                    pass
+                else:
+                    b = int(playerlista[r][0])
+                    poangc += b
+            
+            count = playerlista[q:].count('A')
+            if count == 1:
+                if q == 0:
+                    if poangc + 11 >= poangp and poangc + 11 <= 21 and poangc + 11 >= 17:
+                        poangc += 11
+                        #vin
+                    elif poangc + 11 >= 17 and poangc + 11 <= 21:
+                        poangc += 11
+                    elif poangc + 11 > 21:
+                        poangc += 1  
+                        q = 2
+                    elif poangc + 11 < 17:
+                        w = 1
+                        q = 2
+                if q < 1:
+                    if poangc + 11 >= poangp and poangc + 11 <= 21 and poangc + 11 > 17:
+                        poangc += 11
+                        a = 2
+                    elif poangc + 11 > 21:
+                        poangc += 1  
+                        q += 1  
+                    elif poangc + 11 < 17:
+                        pass
+            elif count == 2:
+                poangc += 12
+                q = 2
+            elif count == 0:
+                q = 2
