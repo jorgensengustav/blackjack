@@ -1,0 +1,84 @@
+import random
+import e_o_o
+import w_o_r
+class BlackJack():
+    # delar ut korten
+    deal_cards= True
+    deal_cardsplayer= True
+    # pc = players card
+    pc = []
+    decks_card = []
+    cc = []
+    poangpp = 0
+    def cards(self):
+        #14 mars 2020: kopierade denna kod från min förra blackjack fil, denna skapar kortleken.
+        for card_value in range(2, 15):
+            for card_figure in ['h', 's', 'c', 'd']:
+                if card_value == 11:
+                    card_value = 'J'
+                if card_value == 12:
+                    card_value = 'Q'
+                if card_value == 13:
+                    card_value = 'K'
+                if card_value == 14:
+                    card_value = 'A'
+
+                card_value_string = str(card_value)
+                value_plus_figure = card_value_string + ':' + card_figure
+                BlackJack.decks_card.append(value_plus_figure)
+        random.shuffle(BlackJack.decks_card)
+        bj = BlackJack()
+        bj.player()
+    def player(self):
+        #14 mars 2020: denna delar ut de första korten
+        bj = BlackJack()
+        bj.pc.append(bj.decks_card[0])
+        bj.pc.append(bj.decks_card[2])
+
+        bj.decks_card.pop(0) 
+        bj.decks_card.pop(1)
+        print('dina kort: ', bj.pc)
+        
+            
+        bj.computer()
+    def player2(self):
+        aa = input('hit eller pass: ')
+        if aa == 'hit':
+            bj.pc.append(bj.decks_card[0])
+            bj.decks_card.pop(0) 
+            print('dina kort: ', bj.pc)
+
+      
+            bj.computer()
+        elif aa == 'pass':
+            e_o_o.ess(bj.pc, bj.poangpp)
+
+            bj.computerpass()
+                
+            
+    def computer(self):
+        bj = BlackJack()
+        if bj.deal_cards == True:
+            #14 mars 2020: denna delar ut de första korten
+            bj.cc.append(bj.decks_card[0])
+            bj.cc.append(bj.decks_card[2])
+            bj.decks_card.pop(0) 
+            bj.decks_card.pop(1)
+            if 'A' and 'K' in bj.cc:
+                print('loose')
+            elif 'A' and 'Q' in bj.cc:
+                print('loose')
+            elif 'A' and 'J' in bj.cc:
+                print('loose') 
+            else:               
+                bj.deal_cards = False
+                print('datorns kort:', bj.cc[1:])
+                bj.player2()
+        
+            
+
+            
+    def computerpass(self):
+        pass
+bj = BlackJack()
+bj.cards()
